@@ -1,16 +1,36 @@
 ---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import SpecBand from '../components/SpecBand.astro';
+import Marquee from '../components/Marquee.astro';
+import Manifesto from '../components/Manifesto.astro';
+import Pillars from '../components/Pillars.astro';
+import Anatomy from '../components/Anatomy.astro';
+import Fit from '../components/Fit.astro';
+import Process from '../components/Process.astro';
+import Pricing from '../components/Pricing.astro';
+import FaqSection from '../components/FaqSection.astro';
+import Closing from '../components/Closing.astro';
+import Scripts from '../components/Scripts.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+  <Header />
+
+  <main id="conteudo">
+    <Hero />
+    <SpecBand />
+    <Marquee />
+    <Manifesto />
+    <Pillars />
+    <Anatomy />
+    <Fit />
+    <Process />
+    <Pricing />
+    <FaqSection />
+    <Closing />
+  </main>
+
+  <Scripts />
+</Base>

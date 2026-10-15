@@ -1,0 +1,76 @@
+---
+/**
+ * Manifesto com destaque palavra-a-palavra conforme o scroll.
+ * Trechos entre [colchetes] recebem o marca-texto âmbar.
+ */
+const text =
+  'Landing page não é um site bonito. É um [sistema de decisão]: cada palavra, cada seção e cada botão existem para levar um visitante ocupado do primeiro clique a um [único próximo passo] — e [provar com dados] que funcionou.';
+
+type Word = { w: string; hi: boolean };
+const words: Word[] = [];
+let hi = false;
+for (const raw of text.split(' ')) {
+  let w = raw;
+  if (w.startsWith('[')) {
+    hi = true;
+    w = w.slice(1);
+  }
+  const closes = w.includes(']');
+  w = w.replace(']', '');
+  words.push({ w, hi });
+  if (closes) hi = false;
+}
+---
+<section class="section manifesto" aria-labelledby="manifesto-title">
+  <div class="container">
+    <p class="eyebrow rv" id="manifesto-title">O que fazemos, de verdade</p>
+    <p class="manifesto__text" id="manifesto">
+      <span class="sr-only">{text.replace(/[\[\]]/g, '')}</span>
+      {words.map(({ w, hi }) => (
+        <span class:list={['w', { 'w--hi': hi }]} aria-hidden="true">{w} </span>
+      ))}
+    </p>
+  </div>
+</section>
+
+<style>
+  .manifesto {
+    padding-block: clamp(96px, 14vw, 180px);
+  }
+  .manifesto .container {
+    display: grid;
+    gap: 32px;
+    max-width: 1120px;
+  }
+  .manifesto__text {
+    font-family: var(--f-display);
+    font-weight: 650;
+    font-size: clamp(1.875rem, 4.6vw, 4rem);
+    line-height: 1.08;
+    letter-spacing: -0.04em;
+    text-wrap: pretty;
+  }
+  .w {
+    color: #d8d5cd;
+    transition: color 0.35s var(--ease-out);
+  }
+  .w.on {
+    color: var(--c-ink);
+  }
+  .w--hi {
+    position: relative;
+    background-image: linear-gradient(var(--c-amber), var(--c-amber));
+    background-repeat: no-repeat;
+    background-position: 0 88%;
+    background-size: 0% 38%;
+    transition:
+      color 0.35s var(--ease-out),
+      background-size 0.6s var(--ease-out);
+  }
+  .w--hi.on {
+    background-size: 100% 38%;
+  }
+  html:not(.js) .w {
+    color: var(--c-ink);
+  }
+</style>

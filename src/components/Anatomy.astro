@@ -1,0 +1,296 @@
+---
+import Icon from './Icon.astro';
+
+const steps = [
+  {
+    stage: 'Atenção',
+    title: 'Hero de Alto Impacto',
+    role: 'O visitante decide se fica ou sai em 5 segundos. Headline com a dor principal, prova imediata e CTA claro antes da primeira rolagem.',
+    height: '140px',
+    wireType: 'hero',
+  },
+  {
+    stage: 'Identificação',
+    title: 'O Problema Real',
+    role: 'Descrevemos o cenário com o vocabulário real do cliente para gerar reconhecimento imediato: "isso foi feito para mim".',
+    height: '76px',
+    wireType: 'text',
+  },
+  {
+    stage: 'Mecanismo',
+    title: 'A Solução em Etapas',
+    role: 'Mostra como seu serviço resolve o problema em 3 ou 4 passos claros e tangíveis, sem complicações ou jargões vazios.',
+    height: '96px',
+    wireType: 'cols',
+  },
+  {
+    stage: 'Confiança',
+    title: 'Prova Social Irrefutável',
+    role: 'Depoimentos verificáveis, notas de satisfação, dados de mercado e logotipos que neutralizam o ceticismo natural.',
+    height: '88px',
+    wireType: 'proof',
+  },
+  {
+    stage: 'Valor',
+    title: 'A Oferta Transparente',
+    role: 'O que está incluso, bônus, garantias de risco zero e valores sem pegadinhas. Clareza absoluta constrói autoridade.',
+    height: '94px',
+    wireType: 'offer',
+  },
+  {
+    stage: 'Resolução',
+    title: 'Quebra de Objeções (FAQ)',
+    role: 'Respostas diretas no formato "resposta primeiro" para eliminar a última dúvida que ainda trava a tomada de decisão.',
+    height: '80px',
+    wireType: 'faq',
+  },
+  {
+    stage: 'Ação',
+    title: 'CTA Final Redundante',
+    role: 'Canal direto para WhatsApp ou formulário sem links externos ou distrações, capturando quem percorreu toda a página.',
+    height: '72px',
+    wireType: 'cta',
+  },
+];
+---
+<section class="section anatomy section--dark" id="anatomia" aria-labelledby="anatomia-titulo">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow rv">Anatomia de Conversão</p>
+      <h2 class="h-section rv" style="--i:1" id="anatomia-titulo">
+        Uma narrativa desenhada para acompanhar a <span class="mark rv">decisão</span> humana.
+      </h2>
+      <p class="lead rv" style="--i:2">
+        A ordem das seções não é aleatória. Ela responde exatamente às perguntas que o cérebro do visitante faz enquanto rola a tela:
+        o que você faz, por que confiar, como funciona e por que agir agora.
+      </p>
+    </div>
+
+    <ol class="wire-list">
+      {steps.map((s, idx) => (
+        <li class="wire-row rv" style={`--i:${idx * 0.1}`}>
+          <div class="wire-preview" style={`--h:${s.height}`} aria-hidden="true">
+            {s.wireType === 'hero' && (
+              <div class="wb wb--hero">
+                <i class="wb-bar wb-bar--title" style="--w:80%"></i>
+                <i class="wb-bar" style="--w:62%"></i>
+                <i class="wb-bar" style="--w:45%"></i>
+                <b class="wb-btn"></b>
+              </div>
+            )}
+            {s.wireType === 'text' && (
+              <div class="wb">
+                <i class="wb-bar wb-bar--title" style="--w:52%"></i>
+                <i class="wb-bar" style="--w:86%"></i>
+              </div>
+            )}
+            {s.wireType === 'cols' && (
+              <div class="wb">
+                <i class="wb-bar wb-bar--title" style="--w:48%"></i>
+                <div class="wb-cols"><span></span><span></span><span></span></div>
+              </div>
+            )}
+            {s.wireType === 'proof' && (
+              <div class="wb">
+                <i class="wb-bar wb-bar--title" style="--w:40%"></i>
+                <div class="wb-cards"><span></span><span></span><span></span></div>
+              </div>
+            )}
+            {s.wireType === 'offer' && (
+              <div class="wb">
+                <i class="wb-bar wb-bar--title" style="--w:56%"></i>
+                <i class="wb-bar" style="--w:74%"></i>
+                <b class="wb-btn"></b>
+              </div>
+            )}
+            {s.wireType === 'faq' && (
+              <div class="wb">
+                <div class="wb-faq-line"><span></span><i>+</i></div>
+                <div class="wb-faq-line"><span></span><i>+</i></div>
+              </div>
+            )}
+            {s.wireType === 'cta' && (
+              <div class="wb wb--center">
+                <i class="wb-bar wb-bar--title" style="--w:64%"></i>
+                <b class="wb-btn wb-btn--lg"></b>
+              </div>
+            )}
+          </div>
+
+          <div class="wire-note">
+            <span class="wire-stage">{s.stage}</span>
+            <h3 class="h-card wire-title">{s.title}</h3>
+            <p class="wire-desc">{s.role}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .wire-list {
+    display: grid;
+    gap: 0;
+    max-width: 980px;
+    margin-inline: auto;
+  }
+  .wire-row {
+    display: grid;
+    grid-template-columns: minmax(180px, 320px) 1fr;
+    gap: clamp(28px, 6vw, 68px);
+    align-items: stretch;
+    transition: background 0.3s;
+  }
+  .wire-preview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: var(--h, 84px);
+    padding: 16px 20px;
+    background: var(--c-dark-2);
+    border-inline: 1px solid var(--c-dark-line);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    transition:
+      background 0.3s,
+      border-color 0.3s;
+  }
+  .wire-row:first-child .wire-preview {
+    border-top: 1px solid var(--c-dark-line);
+    border-radius: var(--r) var(--r) 0 0;
+  }
+  .wire-row:last-child .wire-preview {
+    border-bottom: 1px solid var(--c-dark-line);
+    border-radius: 0 0 var(--r) var(--r);
+  }
+  .wire-row:hover .wire-preview {
+    background: var(--c-dark-3);
+    border-inline-color: rgba(255, 176, 0, 0.3);
+  }
+
+  .wb {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .wb--center {
+    align-items: center;
+    text-align: center;
+  }
+  .wb-bar {
+    display: block;
+    width: var(--w, 70%);
+    height: 5px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.16);
+    transition: background 0.3s;
+  }
+  .wb-bar--title {
+    height: 9px;
+    background: rgba(255, 255, 255, 0.32);
+  }
+  .wire-row:hover .wb-bar--title {
+    background: var(--c-amber-soft);
+  }
+  .wb-btn {
+    display: block;
+    width: 68px;
+    height: 16px;
+    margin-top: 3px;
+    border-radius: 999px;
+    background: var(--c-amber);
+    box-shadow: 0 0 10px rgba(255, 176, 0, 0.3);
+    transition: transform 0.3s;
+  }
+  .wb-btn--lg {
+    width: 90px;
+    height: 18px;
+  }
+  .wire-row:hover .wb-btn {
+    transform: scale(1.05);
+  }
+  .wb-cols,
+  .wb-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .wb-cols span,
+  .wb-cards span {
+    height: 24px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .wb-faq-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 4px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    color: var(--c-amber);
+    font-size: 11px;
+  }
+  .wb-faq-line span {
+    width: 70%;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .wire-note {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 16px;
+  }
+  .wire-note::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: calc(100% + 12px);
+    width: clamp(12px, 4vw, 44px);
+    height: 1px;
+    background: var(--c-dark-line);
+    transition: background 0.3s;
+  }
+  .wire-row:hover .wire-note::before {
+    background: var(--c-amber);
+  }
+  .wire-stage {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--c-amber);
+  }
+  .wire-title {
+    margin-top: 4px;
+    margin-bottom: 6px;
+    color: #ffffff;
+  }
+  .wire-desc {
+    max-width: 52ch;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--c-dark-muted);
+  }
+
+  @media (max-width: 680px) {
+    .wire-row {
+      grid-template-columns: 100px 1fr;
+      gap: 20px;
+    }
+    .wire-preview {
+      padding: 10px;
+      min-height: calc(var(--h, 84px) * 0.85);
+    }
+    .wire-desc {
+      font-size: 0.875rem;
+    }
+    .wire-title {
+      font-size: 1.0625rem;
+    }
+  }
+</style>

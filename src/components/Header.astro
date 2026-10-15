@@ -1,0 +1,154 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { wa } from '../data/site';
+---
+<div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+
+<header class="hdr" id="site-header">
+  <div class="container hdr__inner">
+    <a href="#inicio" class="hdr__brand" aria-label="EBARA Services — voltar ao início"><Logo /></a>
+    <nav class="hdr__nav" aria-label="Navegação da página">
+      <a href="#especialidades" data-spy-link="especialidades">Especialidades</a>
+      <a href="#processo" data-spy-link="processo">Processo</a>
+      <a href="#planos" data-spy-link="planos">Planos</a>
+      <a href="#faq" data-spy-link="faq">Dúvidas</a>
+    </nav>
+    <a class="btn btn--dark btn--sm hdr__cta" href={wa()} target="_blank" rel="noopener" data-track="cta_header">
+      Pedir orçamento <Icon name="arrow" size={16} />
+    </a>
+  </div>
+</header>
+
+<a class="float-cta" id="float-cta" href={wa()} target="_blank" rel="noopener" data-track="cta_float" aria-label="Pedir orçamento pelo WhatsApp">
+  <span class="float-cta__icon"><Icon name="whatsapp" size={22} /></span>
+  <span class="float-cta__text">Pedir orçamento</span>
+</a>
+
+<style>
+  .progress {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 120;
+    height: 3px;
+    pointer-events: none;
+  }
+  .progress span {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--c-amber), var(--c-amber-hot));
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  .hdr {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    padding-block: 14px;
+    transition:
+      transform 0.5s var(--ease-out),
+      background-color 0.3s,
+      box-shadow 0.3s,
+      padding 0.3s;
+  }
+  .hdr.is-scrolled {
+    padding-block: 10px;
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: saturate(1.8) blur(16px);
+    -webkit-backdrop-filter: saturate(1.8) blur(16px);
+    box-shadow: 0 1px 0 var(--c-line);
+  }
+  .hdr.is-hidden {
+    transform: translateY(-110%);
+  }
+  .hdr__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .hdr__nav {
+    display: flex;
+    gap: 4px;
+    padding: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: var(--shadow-sm);
+  }
+  .hdr__nav a {
+    position: relative;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.9375rem;
+    font-weight: 550;
+    color: var(--c-ink-soft);
+    transition:
+      color 0.2s,
+      background-color 0.3s;
+  }
+  .hdr__nav a:hover {
+    color: var(--c-ink);
+    background: var(--c-paper);
+  }
+  .hdr__nav a.is-active {
+    color: var(--c-ink);
+    background: var(--c-amber);
+  }
+  @media (max-width: 900px) {
+    .hdr__nav {
+      display: none;
+    }
+  }
+  @media (max-width: 420px) {
+    .hdr__cta {
+      display: none;
+    }
+  }
+
+  .float-cta {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px 8px 8px;
+    border-radius: 999px;
+    background: var(--c-ink);
+    color: #fff;
+    font-weight: 650;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.45);
+    transform: translateY(140%) scale(0.9);
+    opacity: 0;
+    transition:
+      transform 0.6s var(--ease-spring),
+      opacity 0.3s;
+  }
+  .float-cta.is-visible {
+    transform: none;
+    opacity: 1;
+  }
+  .float-cta__icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--c-amber);
+    color: var(--c-ink);
+    animation: pulse-ring 2.2s infinite;
+  }
+  .float-cta:hover .float-cta__icon {
+    animation: none;
+    transform: rotate(-12deg) scale(1.06);
+    transition: transform 0.4s var(--ease-spring);
+  }
+  @media (max-width: 560px) {
+    .float-cta {
+      right: 14px;
+      bottom: 14px;
+    }
+  }
+</style>

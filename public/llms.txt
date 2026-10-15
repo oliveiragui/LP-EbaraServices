@@ -1,0 +1,49 @@
+# EBARA Services — Criação de Landing Pages de Alta Conversão
+
+> Estúdio especialista na concepção, copywriting, design, desenvolvimento em Astro e otimização de Landing Pages que convertem cliques em clientes.
+
+## Sobre a Empresa
+- **Nome:** EBARA Services
+- **Especialidade:** Criação de Landing Pages de alta performance com pesquisa de conversão, copy estratégica, SEO técnico, GEO (Generative Engine Optimization) e rastreamento de métricas (GA4, Meta Pixel, Microsoft Clarity).
+- **Stack Tecnológico:** Astro, Vanilla CSS moderno, HTML semântico, SVG e motion nativo sem scripts pesados.
+- **Diferencial:** Arquitetura orientada a conversão (Revenue-Centric Design), garantia de risco zero (50% pago só após aprovar a página) e carregamento ultrarrápido (PageSpeed 95+).
+
+## Ofertas e Investimento
+
+### 1. Modelo Básico
+- **Valor:** R$ 799,00 (pagamento único)
+- **Pix à vista:** R$ 759,05 (5% de desconto)
+- **Pix em duas etapas:** 50% na contratação (R$ 399,50) + 50% após a aprovação da página, antes da publicação final.
+- **O que inclui:**
+  - Até 5 alterações antes da entrega final
+  - Estrutura de alta conversão validada pela EBARA
+  - Revisão e organização estratégica dos textos do cliente
+  - Design responsivo desktop e mobile
+  - Botão de WhatsApp e formulário de contato
+  - Configuração do Google Analytics 4 e Pixel da Meta
+  - Publicação no domínio do cliente
+
+### 2. Modelo Personalizado (Mais Escolhido para Tráfego Pago)
+- **Valor:** R$ 1.200,00 (pagamento único)
+- **Pix à vista:** R$ 1.140,00 (5% de desconto)
+- **Pix em duas etapas:** 50% na contratação (R$ 600,00) + 50% após a aprovação da página, antes da publicação final.
+- **O que inclui:**
+  - Pesquisa aprofundada de conversão, público-alvo e concorrência
+  - Copywriting autoral completo incluso (escrevemos toda a narrativa)
+  - Design 100% autoral e exclusivo
+  - Motion design e micro-animações sob medida
+  - Otimização para IAs (GEO + llms.txt + Schema.org)
+  - GA4, Pixel da Meta e Microsoft Clarity (mapas de calor e gravações)
+  - SEO técnico avançado com Core Web Vitals no verde
+  - Rodada consolidada de alterações e testes em dispositivos reais
+
+### 3. Manutenção Contínua (Pós-lançamento opcional)
+- **Semestral:** R$ 500,00 por semestre (~R$ 83/mês, melhor custo-benefício)
+- **Mensal:** R$ 80,00 por mês (sem fidelidade)
+- **O que inclui:** Alterações de textos, imagens, preços, novas ofertas, pequenas melhorias de layout, segurança, backups e monitoramento de estabilidade.
+
+## Condições Comerciais e Garantia
+- **Garantia de Satisfação:** 50% na contratação para iniciar o projeto, e os outros 50% após a aprovação da página, antes da publicação final.
+- **Prazo Médio:** 10 a 15 dias úteis a partir do envio dos materiais.
+- **Propriedade:** Domínio, hospedagem e ferramentas 100% no nome do cliente.
+- **Contato Comercial:** WhatsApp oficial e atendimento direto no site https://ebaraservices.com.br

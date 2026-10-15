@@ -1,0 +1,262 @@
+---
+---
+<script is:inline>
+  // ---------- Utilitários e Inicialização ----------
+  document.documentElement.classList.add('js');
+
+  // ---------- Reveal on Scroll & Count Up ----------
+  const rvElements = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window && rvElements.length) {
+    const rvObserver = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+
+            // Iniciar contador se houver data-count dentro
+            const counters = entry.target.querySelectorAll('[data-count]');
+            counters.forEach((el) => {
+              if (el.dataset.hasCounted) return;
+              el.dataset.hasCounted = 'true';
+              const target = parseInt(el.getAttribute('data-count') || '0', 10);
+              const duration = 1600;
+              const start = performance.now();
+              const update = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                // ease-out cubic
+                const ease = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(target * ease).toString();
+                if (progress < 1) {
+                  requestAnimationFrame(update);
+                } else {
+                  el.textContent = target.toString();
+                }
+              };
+              requestAnimationFrame(update);
+            });
+
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+    rvElements.forEach((el) => rvObserver.observe(el));
+  } else {
+    rvElements.forEach((el) => el.classList.add('is-in'));
+  }
+
+  // ---------- Controle de Loop de Animações ([data-play]) ----------
+  const playElements = document.querySelectorAll('[data-play]');
+  if ('IntersectionObserver' in window && playElements.length) {
+    const playObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-playing');
+          } else {
+            entry.target.classList.remove('is-playing');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    playElements.forEach((el) => playObserver.observe(el));
+  } else {
+    playElements.forEach((el) => el.classList.add('is-playing'));
+  }
+
+  // ---------- Manifesto: Acender Palavras no Scroll ----------
+  const manifesto = document.getElementById('manifesto');
+  if (manifesto) {
+    const words = manifesto.querySelectorAll('.w');
+    const updateManifesto = () => {
+      const rect = manifesto.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // Começa quando o elemento entra a 80% da viewport e completa até 30%
+      const start = vh * 0.85;
+      const end = vh * 0.25;
+      const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+      const count = Math.floor(progress * words.length);
+      words.forEach((w, i) => {
+        if (i <= count) {
+          w.classList.add('on');
+        } else {
+          w.classList.remove('on');
+        }
+      });
+    };
+    window.addEventListener('scroll', updateManifesto, { passive: true });
+    updateManifesto();
+  }
+
+  // ---------- Estágio Interativo do Hero ----------
+  const stage = document.getElementById('stage');
+  if (stage) {
+    const tabs = stage.querySelectorAll('[data-phase-btn]');
+    let currentPhase = 0;
+    let timer = null;
+    let isHovered = false;
+    let isVisible = true;
+    const PHASE_DURATION = 3200;
+
+    const setPhase = (phase) => {
+      currentPhase = phase;
+      tabs.forEach((tab, idx) => {
+        const isSelected = idx === phase;
+        tab.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+        if (idx < phase) {
+          tab.classList.add('is-done');
+        } else {
+          tab.classList.remove('is-done');
+        }
+        tab.style.setProperty('--dur', `${PHASE_DURATION}ms`);
+      });
+
+      // Modificadores de classes no stage
+      stage.classList.remove('is-copy', 'is-design', 'is-live');
+      if (phase >= 1) stage.classList.add('is-copy');
+      if (phase >= 2) stage.classList.add('is-design');
+      if (phase >= 3) stage.classList.add('is-live');
+    };
+
+    const nextPhase = () => {
+      setPhase((currentPhase + 1) % 4);
+    };
+
+    const startTimer = () => {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => {
+        if (!isHovered && isVisible) {
+          nextPhase();
+        }
+      }, PHASE_DURATION);
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const p = parseInt(tab.getAttribute('data-phase-btn') || '0', 10);
+        setPhase(p);
+        startTimer();
+      });
+    });
+
+    stage.addEventListener('mouseenter', () => {
+      isHovered = true;
+    });
+    stage.addEventListener('mouseleave', () => {
+      isHovered = false;
+    });
+
+    if ('IntersectionObserver' in window) {
+      const stageObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+        });
+      }, { threshold: 0.2 });
+      stageObs.observe(stage);
+    }
+
+    setPhase(0);
+    startTimer();
+  }
+
+  // ---------- Header, Barra de Progresso & Float CTA ----------
+  const header = document.getElementById('site-header');
+  const progressBar = document.getElementById('progress-bar');
+  const floatCta = document.getElementById('float-cta');
+  let lastScrollY = window.scrollY;
+
+  const onScroll = () => {
+    const currentScrollY = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+    // Barra de progresso de leitura
+    if (progressBar && maxScroll > 0) {
+      const progress = Math.min(1, Math.max(0, currentScrollY / maxScroll));
+      progressBar.style.transform = `scaleX(${progress})`;
+    }
+
+    // Header fixo / blur
+    if (header) {
+      if (currentScrollY > 40) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+
+      // Oculta ao rolar para baixo, exibe ao rolar para cima
+      if (currentScrollY > 300 && currentScrollY > lastScrollY && !header.classList.contains('is-hidden')) {
+        header.classList.add('is-hidden');
+      } else if (currentScrollY < lastScrollY && header.classList.contains('is-hidden')) {
+        header.classList.remove('is-hidden');
+      }
+    }
+
+    // Botão flutuante do WhatsApp
+    if (floatCta) {
+      if (currentScrollY > 600) {
+        floatCta.classList.add('is-visible');
+      } else {
+        floatCta.classList.remove('is-visible');
+      }
+    }
+
+    lastScrollY = currentScrollY;
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---------- Scroll Spy para Links da Navegação ----------
+  const spySections = document.querySelectorAll('[data-spy]');
+  const spyLinks = document.querySelectorAll('[data-spy-link]');
+  if ('IntersectionObserver' in window && spySections.length) {
+    const spyObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('data-spy');
+            spyLinks.forEach((link) => {
+              if (link.getAttribute('data-spy-link') === id) {
+                link.classList.add('is-active');
+              } else {
+                link.classList.remove('is-active');
+              }
+            });
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    spySections.forEach((s) => spyObs.observe(s));
+  }
+
+  // ---------- Spotlight Effect nos Cards ----------
+  const spots = document.querySelectorAll('.spot');
+  spots.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mx', `${x}px`);
+      card.style.setProperty('--my', `${y}px`);
+    });
+  });
+
+  // ---------- Copiar Link com Toast Feedback ----------
+  const copyBtn = document.getElementById('copy-btn');
+  const toast = document.getElementById('toast');
+  if (copyBtn && toast) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        toast.classList.add('is-active');
+        setTimeout(() => {
+          toast.classList.remove('is-active');
+        }, 2800);
+      } catch (err) {
+        console.error('Falha ao copiar link:', err);
+      }
+    });
+  }
+</script>

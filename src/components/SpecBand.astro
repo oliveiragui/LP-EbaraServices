@@ -1,0 +1,109 @@
+---
+import Icon from './Icon.astro';
+import { brl, plans, site } from '../data/site';
+---
+<section class="spec-band" aria-label="Resumo do serviço">
+  <div class="container">
+    <div class="spec-grid">
+      <div class="spec-item rv" style="--i:0">
+        <span class="spec-label">Prazo médio</span>
+        <strong class="spec-val">{site.prazo}</strong>
+        <small class="spec-sub">Do briefing à homologação</small>
+      </div>
+
+      <div class="spec-item rv" style="--i:1">
+        <span class="spec-label">Investimento</span>
+        <strong class="spec-val">A partir de {brl(plans.basico.price)}</strong>
+        <small class="spec-sub">5% off no Pix à vista</small>
+      </div>
+
+      <div class="spec-item rv" style="--i:2">
+        <span class="spec-label">Condição de risco</span>
+        <strong class="spec-val">50% só na aprovação</strong>
+        <small class="spec-sub">Pague a 2ª metade após aprovar</small>
+      </div>
+
+      <div class="spec-item rv" style="--i:3">
+        <span class="spec-label">Arquitetura</span>
+        <strong class="spec-val">Astro + Motion nativo</strong>
+        <small class="spec-sub">PageSpeed 95+ e Core Web Vitals</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .spec-band {
+    position: relative;
+    z-index: 10;
+    margin-top: -30px;
+    padding-bottom: clamp(32px, 5vw, 64px);
+  }
+  .spec-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    padding: 24px 28px;
+    border-radius: var(--r);
+    background: #ffffff;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--c-line);
+  }
+  .spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-inline: 12px;
+  }
+  .spec-item:not(:last-child) {
+    border-right: 1px solid var(--c-line);
+  }
+  .spec-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+  .spec-val {
+    font-family: var(--f-display);
+    font-size: clamp(1.125rem, 1.6vw, 1.4rem);
+    font-weight: 700;
+    color: var(--c-ink);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .spec-sub {
+    font-size: 0.8125rem;
+    color: var(--c-ink-soft);
+  }
+
+  @media (max-width: 900px) {
+    .spec-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 16px;
+    }
+    .spec-item:nth-child(2) {
+      border-right: none;
+    }
+  }
+  @media (max-width: 560px) {
+    .spec-band {
+      margin-top: -10px;
+    }
+    .spec-grid {
+      grid-template-columns: 1fr;
+      padding: 20px 18px;
+    }
+    .spec-item {
+      padding-inline: 0;
+      border-right: none !important;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--c-line);
+    }
+    .spec-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+</style>

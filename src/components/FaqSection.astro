@@ -1,0 +1,163 @@
+---
+import Icon from './Icon.astro';
+import { faq } from '../data/faq';
+import { wa } from '../data/site';
+---
+<section class="section section--paper faq-section" id="faq" data-spy="faq" aria-labelledby="faq-titulo">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="faq-aside">
+        <p class="eyebrow rv">Dúvidas Frequentes</p>
+        <h2 class="h-section rv" style="--i:1" id="faq-titulo">
+          Respostas diretas para quem não tem tempo a <span class="mark rv">perder.</span>
+        </h2>
+        <p class="lead rv" style="--i:2">
+          Eliminamos as principais dúvidas que travam a decisão. Se a sua pergunta não estiver aqui, nos chame no WhatsApp e respondemos em poucos minutos.
+        </p>
+
+        <div class="faq-contact-card rv" style="--i:3">
+          <Icon name="whatsapp" size={24} />
+          <div>
+            <strong>Ainda tem alguma dúvida?</strong>
+            <p>Converse diretamente com o especialista da EBARA.</p>
+          </div>
+          <a class="btn btn--amber btn--sm" href={wa('Olá! Tenho uma dúvida sobre a criação de landing page.')} target="_blank" rel="noopener">
+            Falar no WhatsApp <Icon name="arrow" size={14} />
+          </a>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        {faq.map((item, idx) => (
+          <details class="faq-item spot rv" style={`--i:${idx * 0.08}`}>
+            <summary class="faq-summary">
+              <span class="faq-q">{item.q}</span>
+              <span class="faq-icon" aria-hidden="true">
+                <Icon name="plus" size={18} />
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+  .faq-aside {
+    position: sticky;
+    top: 100px;
+    display: grid;
+    gap: 24px;
+  }
+  .faq-contact-card {
+    display: grid;
+    gap: 14px;
+    padding: 24px;
+    border-radius: var(--r);
+    background: #ffffff;
+    border: 1px solid var(--c-line);
+    box-shadow: var(--shadow-sm);
+  }
+  .faq-contact-card :global(svg) {
+    color: var(--c-amber-hot);
+  }
+  .faq-contact-card strong {
+    display: block;
+    font-size: 1.0625rem;
+    color: var(--c-ink);
+  }
+  .faq-contact-card p {
+    font-size: 0.875rem;
+    color: var(--c-muted);
+    margin-top: 2px;
+  }
+
+  .faq-list {
+    display: grid;
+    gap: 12px;
+  }
+  .faq-item {
+    border-radius: var(--r-sm);
+    background: #ffffff;
+    border: 1px solid var(--c-line);
+    box-shadow: var(--shadow-sm);
+    transition:
+      border-color 0.3s,
+      box-shadow 0.3s;
+    overflow: hidden;
+  }
+  .faq-item[open] {
+    border-color: var(--c-amber);
+    box-shadow: var(--shadow);
+  }
+  .faq-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    font-weight: 650;
+    font-size: 1.0625rem;
+    color: var(--c-ink);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-icon {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--c-paper);
+    color: var(--c-ink);
+    flex: none;
+    transition:
+      transform 0.4s var(--ease-spring),
+      background-color 0.3s;
+  }
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+    background: var(--c-amber);
+    color: var(--c-ink);
+  }
+  .faq-answer {
+    padding: 0 24px 22px;
+    color: var(--c-ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border-top: 1px dashed var(--c-line);
+    padding-top: 14px;
+  }
+
+  @media (max-width: 900px) {
+    .faq-layout {
+      grid-template-columns: 1fr;
+    }
+    .faq-aside {
+      position: static;
+    }
+  }
+  @media (max-width: 560px) {
+    .faq-summary {
+      padding: 16px 18px;
+      font-size: 0.975rem;
+    }
+    .faq-answer {
+      padding: 12px 18px 18px;
+    }
+  }
+</style>

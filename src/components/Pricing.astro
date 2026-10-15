@@ -1,0 +1,569 @@
+---
+import Icon from './Icon.astro';
+import { brl, maintenance, pix, plans, wa } from '../data/site';
+
+const bPrice = plans.basico.price;
+const pPrice = plans.personalizado.price;
+
+const bPix = pix(bPrice);
+const pPix = pix(pPrice);
+---
+<section class="section pricing" id="planos" data-spy="planos" aria-labelledby="planos-titulo">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <p class="eyebrow rv">Investimento Transparente</p>
+      <h2 class="h-section rv" style="--i:1" id="planos-titulo">
+        Planos claros, sem surpresas e com <span class="mark rv">risco zero.</span>
+      </h2>
+      <p class="lead rv" style="--i:2">
+        Você não precisa pagar 100% adiantado para quem não conhece.
+        Na EBARA Services, você só conclui o pagamento depois que vê e aprova a página pronta.
+      </p>
+    </div>
+
+    <!-- Cards principais -->
+    <div class="plans-grid">
+      <!-- Modelo Básico -->
+      <article class="plan-card spot rv rv--scale" style="--i:0">
+        <div class="plan-header">
+          <span class="plan-tier">Modelo Validado</span>
+          <h3 class="h-card plan-name">{plans.basico.name}</h3>
+          <p class="plan-desc">Para quem precisa validar uma oferta ou produto rapidamente com investimento enxuto e estrutura comprovada.</p>
+        </div>
+
+        <div class="plan-pricing">
+          <span class="plan-currency">R$</span>
+          <strong class="plan-price">799</strong>
+          <span class="plan-period">pagamento único</span>
+        </div>
+
+        <div class="plan-pix-box">
+          <Icon name="bolt" size={16} />
+          <span>ou <strong>{brl(bPix)}</strong> no Pix à vista (5% off)</span>
+        </div>
+
+        <div class="plan-split-info">
+          <span>Pix em 2 etapas: 50% na contratação ({brl(bPrice / 2)}) + 50% após aprovação</span>
+        </div>
+
+        <div class="plan-cta-wrap">
+          <a class="btn btn--ghost btn--block" href={wa('Olá! Gostaria de contratar a Landing Page Modelo Básico (R$ 799).')} target="_blank" rel="noopener" data-track="cta_plano_basico">
+            Escolher Modelo Básico <Icon name="arrow" size={16} />
+          </a>
+          <small class="plan-trigger">50% só após você aprovar a página</small>
+        </div>
+
+        <div class="plan-divider"></div>
+
+        <ul class="plan-features">
+          <li class="plan-feat plan-feat--highlight">
+            <Icon name="check" size={18} />
+            <span><strong>Até {plans.basico.revisions} alterações</strong> antes da entrega final</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>Estrutura de alta conversão validada pela EBARA</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>Revisão e organização estratégica dos seus textos</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>Design responsivo exclusivo para celular e desktop</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>Botões de WhatsApp e formulário de contato</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>Google Analytics 4 e Pixel da Meta configurados</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>SEO técnico básico e publicação no seu domínio</span>
+          </li>
+        </ul>
+      </article>
+
+      <!-- Modelo Personalizado (Destaque RCD) -->
+      <article class="plan-card plan-card--featured spot rv rv--scale" style="--i:1">
+        <div class="featured-badge">
+          <Icon name="spark" size={14} /> Mais Escolhido para Tráfego Pago
+        </div>
+
+        <div class="plan-header">
+          <span class="plan-tier plan-tier--featured">Estratégia Completa</span>
+          <h3 class="h-card plan-name">{plans.personalizado.name}</h3>
+          <p class="plan-desc">Para quem vai investir em anúncios e quer espremer o máximo ROI por clique com narrativa única, motion design e IA.</p>
+        </div>
+
+        <div class="plan-pricing">
+          <span class="plan-currency">R$</span>
+          <strong class="plan-price plan-price--hot">1.200</strong>
+          <span class="plan-period">pagamento único</span>
+        </div>
+
+        <div class="plan-pix-box plan-pix-box--hot">
+          <Icon name="bolt" size={16} />
+          <span>ou <strong>{brl(pPix)}</strong> no Pix à vista (5% off)</span>
+        </div>
+
+        <div class="plan-split-info plan-split-info--hot">
+          <span>Pix em 2 etapas: 50% na contratação ({brl(pPrice / 2)}) + 50% após aprovação</span>
+        </div>
+
+        <div class="plan-cta-wrap">
+          <a class="btn btn--amber btn--block" href={wa('Olá! Gostaria de contratar a Landing Page Modelo Personalizado (R$ 1.200).')} target="_blank" rel="noopener" data-track="cta_plano_personalizado">
+            Escolher Modelo Personalizado <Icon name="arrow" size={18} />
+          </a>
+          <small class="plan-trigger">50% só após você aprovar a página · Comece agora</small>
+        </div>
+
+        <div class="plan-divider"></div>
+
+        <ul class="plan-features">
+          <li class="plan-feat plan-feat--highlight">
+            <Icon name="check" size={18} />
+            <span><strong>Pesquisa de conversão</strong> e estudo de concorrentes</span>
+          </li>
+          <li class="plan-feat plan-feat--highlight">
+            <Icon name="check" size={18} />
+            <span><strong>Copywriting autoral completo incluso</strong> (escrevemos tudo)</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>Design 100% autoral desenhado para a sua marca</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span><strong>Motion design e micro-animações sob medida</strong></span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span><strong>GEO: Otimização para IAs</strong> (llms.txt + Schema.org)</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>GA4, Pixel Meta + <strong>Microsoft Clarity (mapas de calor)</strong></span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>SEO técnico avançado com Core Web Vitals no verde</span>
+          </li>
+          <li class="plan-feat">
+            <Icon name="check" size={18} />
+            <span>Ajustes ilimitados durante a rodada de homologação</span>
+          </li>
+        </ul>
+      </article>
+    </div>
+
+    <!-- Detalhes de Pagamento & Manutenção -->
+    <div class="payment-and-care">
+      <!-- Formas de Pagamento -->
+      <div class="pay-box spot rv rv--left">
+        <div class="pay-box__head">
+          <span class="pay-box__icon"><Icon name="card" size={20} /></span>
+          <h3 class="h-card">Formas de Pagamento Transparentes</h3>
+        </div>
+        <p class="pay-box__desc">Criamos a política de pagamento para alinhar incentivos: você só paga o total quando estiver 100% satisfeito com o resultado.</p>
+        
+        <div class="pay-options">
+          <div class="pay-opt">
+            <div class="pay-opt__title">
+              <Icon name="check" size={16} />
+              <strong>Pix em 2 etapas (Sem juros)</strong>
+            </div>
+            <p><strong>50% na contratação</strong> para iniciar os trabalhos e planejamento de copy. Os outros <strong>50% após a aprovação da página</strong>, antes da publicação final no seu domínio.</p>
+          </div>
+
+          <div class="pay-opt pay-opt--discount">
+            <div class="pay-opt__title">
+              <Icon name="bolt" size={16} />
+              <strong>Pix à vista com 5% de desconto</strong>
+            </div>
+            <p>Básico por <strong>{brl(bPix)}</strong> ou Personalizado por <strong>{brl(pPix)}</strong>. Economia imediata no fechamento do projeto.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manutenção Opcional -->
+      <div class="care-box spot rv rv--right">
+        <div class="care-box__head">
+          <span class="care-box__icon"><Icon name="shield" size={20} /></span>
+          <div>
+            <span class="care-sub">Pós-lançamento opcional</span>
+            <h3 class="h-card">Manutenção Contínua</h3>
+          </div>
+        </div>
+        <p class="care-box__desc">Para manter sua página atualizada, protegida e convertendo enquanto suas campanhas e ofertas evoluem.</p>
+
+        <div class="care-prices">
+          <div class="care-plan care-plan--hot">
+            <span class="care-plan__badge">Melhor Custo-Benefício</span>
+            <div class="care-plan__val">
+              <strong>{brl(maintenance.semestral)}</strong>
+              <small>/semestre</small>
+            </div>
+            <span class="care-plan__save">Equivale a ~R$ 83/mês com cobertura total</span>
+          </div>
+
+          <div class="care-plan">
+            <span class="care-plan__label">Plano Mensal</span>
+            <div class="care-plan__val">
+              <strong>{brl(maintenance.mensal)}</strong>
+              <small>/mês</small>
+            </div>
+            <span class="care-plan__save">Cancele quando quiser, sem fidelidade</span>
+          </div>
+        </div>
+
+        <ul class="care-items">
+          <li><Icon name="check" size={14} /> Alterações de textos, imagens e preços</li>
+          <li><Icon name="check" size={14} /> Atualização de ofertas e datas promocionais</li>
+          <li><Icon name="check" size={14} /> Backups periódicos e monitoramento de uptime</li>
+          <li><Icon name="check" size={14} /> Pequenos ajustes visuais e de botões</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .plans-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    align-items: stretch;
+    max-width: 1060px;
+    margin-inline: auto;
+    margin-bottom: clamp(48px, 6vw, 72px);
+  }
+
+  .plan-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(32px, 4vw, 44px);
+    border-radius: var(--r-lg);
+    background: #ffffff;
+    border: 1px solid var(--c-line);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 0.4s var(--ease-out),
+      box-shadow 0.4s var(--ease-out);
+  }
+  .plan-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+
+  /* Destaque Personalizado */
+  .plan-card--featured {
+    border: 2px solid var(--c-amber);
+    box-shadow: 0 24px 60px -20px rgba(255, 176, 0, 0.28), var(--shadow);
+    background: linear-gradient(180deg, #fffcf5 0%, #ffffff 28%);
+  }
+  .featured-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: var(--c-ink);
+    color: var(--c-amber);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  }
+  .featured-badge :global(svg) {
+    color: var(--c-amber);
+  }
+
+  .plan-header {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .plan-tier {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c-muted);
+  }
+  .plan-tier--featured {
+    color: var(--c-amber-ink);
+  }
+  .plan-name {
+    font-size: 1.75rem;
+    color: var(--c-ink);
+  }
+  .plan-desc {
+    font-size: 0.9375rem;
+    color: var(--c-ink-soft);
+    line-height: 1.5;
+  }
+
+  .plan-pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .plan-currency {
+    font-family: var(--f-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--c-ink);
+  }
+  .plan-price {
+    font-family: var(--f-display);
+    font-size: clamp(2.75rem, 4.5vw, 3.75rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--c-ink);
+  }
+  .plan-price--hot {
+    color: var(--c-ink);
+  }
+  .plan-period {
+    font-size: 0.875rem;
+    color: var(--c-muted);
+  }
+
+  .plan-pix-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: var(--c-paper);
+    font-size: 0.85rem;
+    color: var(--c-ink-soft);
+    margin-bottom: 6px;
+  }
+  .plan-pix-box :global(svg) {
+    color: var(--c-amber-hot);
+  }
+  .plan-pix-box--hot {
+    background: var(--c-amber-soft);
+    color: var(--c-amber-ink);
+  }
+  .plan-split-info {
+    font-size: 0.8125rem;
+    color: var(--c-muted);
+    margin-bottom: 24px;
+  }
+  .plan-split-info--hot {
+    color: var(--c-ink-soft);
+    font-weight: 500;
+  }
+
+  .plan-cta-wrap {
+    display: grid;
+    gap: 8px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .plan-trigger {
+    font-size: 0.75rem;
+    color: var(--c-muted);
+  }
+
+  .plan-divider {
+    height: 1px;
+    background: var(--c-line);
+    margin-bottom: 24px;
+  }
+
+  .plan-features {
+    display: grid;
+    gap: 14px;
+  }
+  .plan-feat {
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+    color: var(--c-ink-soft);
+  }
+  .plan-feat :global(svg) {
+    color: var(--c-amber-hot);
+    margin-top: 2px;
+  }
+  .plan-feat--highlight {
+    color: var(--c-ink);
+  }
+  .plan-feat--highlight strong {
+    color: var(--c-ink);
+    font-weight: 700;
+  }
+
+  /* Detalhes de Pagamento e Manutenção */
+  .payment-and-care {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 1060px;
+    margin-inline: auto;
+  }
+  .pay-box,
+  .care-box {
+    padding: clamp(28px, 3.5vw, 36px);
+    border-radius: var(--r-lg);
+    background: #ffffff;
+    border: 1px solid var(--c-line);
+    box-shadow: var(--shadow-sm);
+  }
+  .pay-box__head,
+  .care-box__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .pay-box__icon,
+  .care-box__icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--c-paper);
+    color: var(--c-ink);
+    flex: none;
+  }
+  .care-sub {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--c-amber-ink);
+  }
+  .pay-box__desc,
+  .care-box__desc {
+    font-size: 0.9375rem;
+    color: var(--c-ink-soft);
+    margin-bottom: 22px;
+    line-height: 1.5;
+  }
+
+  .pay-options {
+    display: grid;
+    gap: 14px;
+  }
+  .pay-opt {
+    padding: 16px;
+    border-radius: var(--r-sm);
+    background: var(--c-paper);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  .pay-opt__title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    color: var(--c-ink);
+  }
+  .pay-opt__title :global(svg) {
+    color: var(--c-amber-hot);
+  }
+  .pay-opt p {
+    color: var(--c-ink-soft);
+  }
+  .pay-opt--discount {
+    border: 1px solid var(--c-amber);
+    background: #fffdf5;
+  }
+
+  /* Preços de manutenção */
+  .care-prices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .care-plan {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border-radius: var(--r-sm);
+    background: var(--c-paper);
+    border: 1px solid var(--c-line);
+  }
+  .care-plan--hot {
+    background: var(--c-amber-soft);
+    border-color: rgba(255, 176, 0, 0.4);
+  }
+  .care-plan__badge {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--c-amber-ink);
+    margin-bottom: 4px;
+  }
+  .care-plan__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--c-muted);
+    margin-bottom: 4px;
+  }
+  .care-plan__val {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .care-plan__val strong {
+    font-family: var(--f-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--c-ink);
+  }
+  .care-plan__val small {
+    font-size: 0.8125rem;
+    color: var(--c-muted);
+  }
+  .care-plan__save {
+    font-size: 0.75rem;
+    color: var(--c-ink-soft);
+    margin-top: 4px;
+  }
+
+  .care-items {
+    display: grid;
+    gap: 10px;
+  }
+  .care-items li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: var(--c-ink-soft);
+  }
+  .care-items :global(svg) {
+    color: var(--c-amber-hot);
+    flex: none;
+  }
+
+  @media (max-width: 860px) {
+    .plans-grid,
+    .payment-and-care {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

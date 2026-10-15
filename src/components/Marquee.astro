@@ -1,0 +1,101 @@
+---
+const items = [
+  'Pesquisa de conversão',
+  'Copy que vende',
+  'SEO técnico',
+  'GEO para IAs',
+  'CTAs estratégicos',
+  'Core Web Vitals',
+  'GA4 & Pixel',
+  'Mapas de calor',
+  'Motion design',
+  'Dados estruturados',
+];
+---
+<section class="tapes" aria-label="Especialidades da EBARA" data-play>
+  <div class="tape tape--dark">
+    <div class="tape__track">
+      {[0, 1].map((n) => (
+        <ul aria-hidden={n === 1 ? 'true' : undefined}>
+          {items.map((t) => <li>{t}<span class="star">✦</span></li>)}
+        </ul>
+      ))}
+    </div>
+  </div>
+  <div class="tape tape--amber" aria-hidden="true">
+    <div class="tape__track tape__track--rev">
+      {[0, 1].map(() => (
+        <ul>
+          {['Landing pages', 'que convertem', 'medidas', 'e otimizadas', 'por dados'].map((t) => <li>{t}<span class="star">●</span></li>)}
+        </ul>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tapes {
+    position: relative;
+    height: clamp(150px, 18vw, 200px);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+  }
+  .tape {
+    position: absolute;
+    left: -5%;
+    right: -5%;
+    padding: 16px 0;
+    overflow: hidden;
+  }
+  .tape--dark {
+    z-index: 2;
+    background: var(--c-ink);
+    color: #fff;
+    transform: rotate(-2.4deg);
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+  }
+  .tape--amber {
+    background: var(--c-amber);
+    color: var(--c-ink);
+    transform: rotate(2deg);
+  }
+  .tape__track {
+    display: flex;
+    width: max-content;
+    animation: marquee 38s linear infinite;
+  }
+  .tape__track--rev {
+    animation-direction: reverse;
+    animation-duration: 46s;
+  }
+  .tape ul {
+    display: flex;
+    flex: none;
+  }
+  .tape li {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding-right: 28px;
+    font-family: var(--f-display);
+    font-weight: 650;
+    font-size: clamp(1.125rem, 2.2vw, 1.625rem);
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+  .tape--dark .star {
+    color: var(--c-amber);
+  }
+  .tape--amber .star {
+    font-size: 0.5em;
+  }
+  .tapes:hover .tape__track {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+</style>

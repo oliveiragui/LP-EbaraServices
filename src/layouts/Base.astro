@@ -1,0 +1,164 @@
+---
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource-variable/bricolage-grotesque/wght.css';
+import '../styles/global.css';
+import interWoff from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import bricolageWoff from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2?url';
+import { site, plans, maintenance, pix, wa } from '../data/site';
+import { faq } from '../data/faq';
+
+const base = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL.slice(0, -1)
+  : import.meta.env.BASE_URL;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+const ogImage = new URL(`${base}/og-ebara.jpg`, Astro.site ?? site.url).href;
+
+const offer = (name: string, price: number, description: string) => ({
+  '@type': 'Offer',
+  name,
+  description,
+  price,
+  priceCurrency: 'BRL',
+  availability: 'https://schema.org/InStock',
+  url: `${canonical}#planos`,
+});
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${canonical}#org`,
+      name: site.name,
+      url: canonical,
+      logo: new URL('/favicon.svg', site.url).href,
+      image: ogImage,
+      email: site.email,
+      description:
+        'Estúdio especializado em criação de landing pages de alta conversão: pesquisa de conversão, copy, SEO, GEO, CTAs, design com motion e métricas.',
+      areaServed: { '@type': 'Country', name: 'Brasil' },
+      knowsAbout: [
+        'Landing page',
+        'CRO — otimização da taxa de conversão',
+        'SEO técnico',
+        'GEO — Generative Engine Optimization',
+        'Copywriting de conversão',
+        'Core Web Vitals',
+        'Google Analytics 4',
+      ],
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        url: wa(),
+        availableLanguage: 'pt-BR',
+      },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: site.title,
+      description: site.description,
+      inLanguage: 'pt-BR',
+      isPartOf: { '@type': 'WebSite', name: site.name, url: canonical },
+      about: { '@id': `${canonical}#servico` },
+      primaryImageOfPage: { '@type': 'ImageObject', url: ogImage, width: 1200, height: 630 },
+      dateModified: site.updated,
+    },
+    {
+      '@type': 'Service',
+      '@id': `${canonical}#servico`,
+      name: 'Criação de landing page',
+      serviceType: 'Criação de landing page de alta conversão',
+      provider: { '@id': `${canonical}#org` },
+      areaServed: { '@type': 'Country', name: 'Brasil' },
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Planos de landing page EBARA Services',
+        itemListElement: [
+          offer(
+            `Landing page ${plans.basico.name}`,
+            plans.basico.price,
+            `Estrutura de alta conversão validada, ${plans.basico.revisions} rodadas de alterações antes da entrega final. Pix à vista: R$ ${pix(plans.basico.price)}.`,
+          ),
+          offer(
+            `Landing page ${plans.personalizado.name}`,
+            plans.personalizado.price,
+            `Pesquisa de conversão, copy, design exclusivo, motion, SEO e GEO. Pix à vista: R$ ${pix(plans.personalizado.price)}.`,
+          ),
+          {
+            ...offer('Manutenção mensal', maintenance.mensal, 'Atualizações, segurança e pequenos ajustes.'),
+            priceSpecification: {
+              '@type': 'UnitPriceSpecification',
+              price: maintenance.mensal,
+              priceCurrency: 'BRL',
+              billingDuration: 'P1M',
+            },
+          },
+          {
+            ...offer('Manutenção semestral', maintenance.semestral, 'Atualizações, segurança e pequenos ajustes.'),
+            priceSpecification: {
+              '@type': 'UnitPriceSpecification',
+              price: maintenance.semestral,
+              priceCurrency: 'BRL',
+              billingDuration: 'P6M',
+            },
+          },
+        ],
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${canonical}#faq`,
+      mainEntity: faq.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    },
+  ],
+};
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <title>{site.title}</title>
+    <meta name="description" content={site.description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="author" content={site.name} />
+
+    <link rel="preload" href={bricolageWoff} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interWoff} as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href={`${base}/favicon.svg`} type="image/svg+xml" />
+    <link rel="alternate" type="text/plain" href={`${base}/llms.txt`} title="llms.txt" />
+    <link rel="sitemap" href={`${base}/sitemap-index.xml`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={site.title} />
+    <meta property="og:description" content={site.description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="EBARA Services — Landing pages que convertem. SEO, GEO, CRO e métricas." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={site.title} />
+    <meta name="twitter:description" content={site.description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <slot />
+  </body>
+</html>
